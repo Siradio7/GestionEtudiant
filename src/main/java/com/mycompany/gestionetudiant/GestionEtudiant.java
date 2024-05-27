@@ -33,8 +33,10 @@ public class GestionEtudiant {
             try {
                 fen = new Entry();
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                System.out.println(e.getMessage());
             }
+
+            assert fen != null;
             fen.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             fen.setLocationRelativeTo(null);
             fen.setVisible(true);

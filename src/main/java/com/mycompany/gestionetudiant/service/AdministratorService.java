@@ -49,10 +49,9 @@ public class AdministratorService implements IAdministrator {
             preparedStatement.setString(2, administrator.getUsername());
             preparedStatement.setString(3, administrator.getPassword());
 
-            if(preparedStatement.execute()) {
-                preparedStatement.close();
-                return true;
-            }
+            preparedStatement.execute();
+            preparedStatement.close();
+            return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
