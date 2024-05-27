@@ -165,6 +165,10 @@ public class Signup extends javax.swing.JPanel {
         }
 
         JOptionPane.showMessageDialog(this, "Registration success", "Registration", JOptionPane.INFORMATION_MESSAGE);
+        SwingUtilities.getWindowAncestor(this).dispose();
+        Home home = new Home();
+        home.setLocationRelativeTo(null);
+        home.setVisible(true);
     }//GEN-LAST:event_btn_signupActionPerformed
 
     public void setListener(EventsListener listener) {

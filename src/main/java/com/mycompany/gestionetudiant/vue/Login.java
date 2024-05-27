@@ -131,6 +131,10 @@ public class Login extends javax.swing.JPanel {
         }
 
         JOptionPane.showMessageDialog(this, "Authentication success", "Authentication", JOptionPane.INFORMATION_MESSAGE);
+        SwingUtilities.getWindowAncestor(this).dispose();
+        Home home = new Home();
+        home.setLocationRelativeTo(null);
+        home.setVisible(true);
     }//GEN-LAST:event_btn_loginActionPerformed
 
     private void btn_signupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_signupActionPerformed
