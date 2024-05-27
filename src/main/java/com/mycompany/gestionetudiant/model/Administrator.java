@@ -2,13 +2,14 @@ package com.mycompany.gestionetudiant.model;
 
 public class Administrator {
     private int id;
+    private String name;
     private String username;
     private String password;
 
     public Administrator() {
     }
 
-    public Administrator(String username, String password) {
+    public Administrator(String name, String username, String password) {
         this.username = username;
         this.password = password;
     }
@@ -19,6 +20,14 @@ public class Administrator {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getUsername() {
