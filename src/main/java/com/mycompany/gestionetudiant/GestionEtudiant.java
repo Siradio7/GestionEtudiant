@@ -28,7 +28,10 @@ public class GestionEtudiant {
         }
 
         EventQueue.invokeLater(() -> {
-
+            Entry fen = new Entry();
+            fen.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            fen.setLocationRelativeTo(null);
+            fen.setVisible(true);
         });
     }
 }
