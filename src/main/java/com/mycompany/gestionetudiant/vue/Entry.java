@@ -6,6 +6,8 @@ package com.mycompany.gestionetudiant.vue;
 
 import com.mycompany.gestionetudiant.Interfaces.EventsListener;
 
+import java.sql.SQLException;
+
 /**
  *
  * @author syntax-error
@@ -17,7 +19,7 @@ public class Entry extends javax.swing.JFrame implements EventsListener {
     /**
      * Creates new form Entry
      */
-    public Entry() {
+    public Entry() throws SQLException {
         initComponents();
         login.setListener(this);
         signup.setListener(this);

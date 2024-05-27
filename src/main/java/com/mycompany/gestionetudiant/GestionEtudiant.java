@@ -7,6 +7,7 @@ package com.mycompany.gestionetudiant;
 import com.mycompany.gestionetudiant.vue.Entry;
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLException;
 import java.util.logging.*;
 
 /**
@@ -28,7 +29,12 @@ public class GestionEtudiant {
         }
 
         EventQueue.invokeLater(() -> {
-            Entry fen = new Entry();
+            Entry fen = null;
+            try {
+                fen = new Entry();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
             fen.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             fen.setLocationRelativeTo(null);
             fen.setVisible(true);
