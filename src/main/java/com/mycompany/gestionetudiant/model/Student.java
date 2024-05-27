@@ -10,6 +10,7 @@ package com.mycompany.gestionetudiant.model;
  */
 
 public class Student {
+    private int id;
     private String name;
     private String registrationNumber;
     private String department;
@@ -29,6 +30,14 @@ public class Student {
         this.level = level;
         this.address = address;
         this.phoneNumber = phoneNumber;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
