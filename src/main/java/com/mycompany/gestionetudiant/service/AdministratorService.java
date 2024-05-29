@@ -14,9 +14,9 @@ public class AdministratorService implements IAdministrator {
     }
 
     @Override
-    public boolean login(Administrator administrator) {
+    public Administrator login(Administrator administrator) {
         if (administrator == null) {
-            return false;
+            return null;
         }
 
         this.request = "SELECT * FROM administrator WHERE username='" + administrator.getUsername() + "' AND password=MD5('" + administrator.getPassword() + "')";
@@ -26,13 +26,19 @@ public class AdministratorService implements IAdministrator {
             ResultSet result = statement.executeQuery(this.request);
 
             if (result.next()) {
-                return true;
+                Administrator logedAdministrator = new Administrator();
+
+                logedAdministrator.setName(result.getString("name"));
+                logedAdministrator.setUsername(result.getString("username"));
+                logedAdministrator.setPassword(result.getString("password"));
+
+                return logedAdministrator;
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
 
-        return false;
+        return null;
     }
 
     @Override
