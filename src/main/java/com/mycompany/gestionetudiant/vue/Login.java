@@ -10,6 +10,7 @@ import com.mycompany.gestionetudiant.service.AdministratorService;
 
 import javax.swing.*;
 import java.sql.SQLException;
+import java.util.prefs.Preferences;
 
 /**
  *
@@ -18,7 +19,7 @@ import java.sql.SQLException;
 
 public class Login extends javax.swing.JPanel {
     private EventsListener listener;
-    private AdministratorService service = new AdministratorService();
+    private final AdministratorService service = new AdministratorService();
 
     /**
      * Creates new form Login
@@ -125,13 +126,17 @@ public class Login extends javax.swing.JPanel {
         admin.setUsername(username);
         admin.setPassword(password);
 
-        if (!service.login(admin)) {
+        Administrator connectedAdministrator = this.service.login(admin);
+
+        if (connectedAdministrator == null) {
             JOptionPane.showMessageDialog(this, "Authentication failed", "Authentication", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         JOptionPane.showMessageDialog(this, "Authentication success", "Authentication", JOptionPane.INFORMATION_MESSAGE);
         SwingUtilities.getWindowAncestor(this).dispose();
+        Preferences preferences = Preferences.systemNodeForPackage(Login.class);
+        preferences.put("name", connectedAdministrator.getName());
         Home home = new Home();
         home.setLocationRelativeTo(null);
         home.setVisible(true);

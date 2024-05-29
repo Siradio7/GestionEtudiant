@@ -5,18 +5,21 @@
 package com.mycompany.gestionetudiant.vue;
 
 import java.sql.SQLException;
+import java.util.prefs.Preferences;
 
 /**
  *
  * @author syntax-error
  */
 public class Home extends javax.swing.JFrame {
+    private final Preferences preferences = Preferences.systemNodeForPackage(Login.class);
 
     /**
      * Creates new form Home
      */
     public Home() {
         initComponents();
+        this.lb_connected_user.setText(this.preferences.get("name", ""));
     }
 
     /**
@@ -164,6 +167,8 @@ public class Home extends javax.swing.JFrame {
     private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
         // TODO add your handling code here:
         this.dispose();
+        this.preferences.remove("name");
+
         try {
             Entry login = new Entry();
             login.setLocationRelativeTo(null);
