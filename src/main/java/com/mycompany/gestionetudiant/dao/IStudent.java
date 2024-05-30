@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IStudent {
-    public Optional<Student> getStudent(Student student);
-    public Student addStudent(Student student);
+    public Student getStudent(Student student);
+    public boolean addStudent(Student student);
     public List<Student> getStudents();
-    public void updateStudent(Student student);
-    public void removeStudent(Student student);
+    public boolean updateStudent(Student student);
+    public boolean removeStudent(Student student);
 }
