@@ -4,6 +4,8 @@
  */
 package com.mycompany.gestionetudiant.vue;
 
+import com.mycompany.gestionetudiant.vue.crud.AddStudent;
+
 import java.sql.SQLException;
 import java.util.prefs.Preferences;
 
@@ -45,7 +47,7 @@ public class Home extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 51));
 
-        btn_logout.setBackground(new java.awt.Color(235, 0, 0));
+        btn_logout.setBackground(new java.awt.Color(220, 38, 38));
         btn_logout.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btn_logout.setForeground(new java.awt.Color(255, 255, 255));
         btn_logout.setText("Se deconnecter");
@@ -57,7 +59,6 @@ public class Home extends javax.swing.JFrame {
 
         lb_connected_user.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         lb_connected_user.setForeground(new java.awt.Color(255, 255, 255));
-        lb_connected_user.setText("Administrateur");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -74,9 +75,9 @@ public class Home extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lb_connected_user, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-                    .addComponent(btn_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_logout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -84,6 +85,11 @@ public class Home extends javax.swing.JFrame {
 
         btn_add.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
         btn_add.setText("Ajouter");
+        btn_add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_addActionPerformed(evt);
+            }
+        });
 
         btn_update.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
         btn_update.setText("Modifier");
@@ -177,6 +183,18 @@ public class Home extends javax.swing.JFrame {
             throw new RuntimeException(e);
         }
     }//GEN-LAST:event_btn_logoutActionPerformed
+
+    private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
+        // TODO add your handling code here:
+        try {
+            AddStudent fen = new AddStudent();
+
+            fen.setLocationRelativeTo(null);
+            fen.setVisible(true);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }//GEN-LAST:event_btn_addActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_add;
