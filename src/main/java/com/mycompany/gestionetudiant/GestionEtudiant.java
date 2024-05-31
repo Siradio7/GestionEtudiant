@@ -5,16 +5,21 @@
 package com.mycompany.gestionetudiant;
 
 import com.mycompany.gestionetudiant.vue.Entry;
+import com.mycompany.gestionetudiant.vue.Home;
+import com.mycompany.gestionetudiant.vue.Login;
+
 import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
 import java.util.logging.*;
+import java.util.prefs.Preferences;
 
 /**
  *
  * @author syntax-error
  */
 public class GestionEtudiant {
+    private static final Preferences preferences = Preferences.systemNodeForPackage(Login.class);
 
     public static void main(String[] args) {
         try {
@@ -30,6 +35,22 @@ public class GestionEtudiant {
 
         EventQueue.invokeLater(() -> {
             Entry fen = null;
+
+            if (!preferences.get("name", "").isEmpty()) {
+
+                Home home = null;
+                try {
+                    home = new Home();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+
+                home.setLocationRelativeTo(null);
+                home.setVisible(true);
+
+                return;
+            }
+
             try {
                 fen = new Entry();
             } catch (SQLException e) {
