@@ -125,7 +125,7 @@ public class StudentService implements IStudent {
 
     @Override
     public boolean removeStudent(Student student) {
-        this.request = "DELETE students WHERE registration_number=?)";
+        this.request = "DELETE FROM students WHERE registration_number=?";
 
         try {
             PreparedStatement statement = this.connection.prepareStatement(this.request);
