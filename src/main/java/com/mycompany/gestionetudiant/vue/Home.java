@@ -4,10 +4,14 @@
  */
 package com.mycompany.gestionetudiant.vue;
 
+import com.mycompany.gestionetudiant.model.Student;
+import com.mycompany.gestionetudiant.service.StudentService;
 import com.mycompany.gestionetudiant.vue.crud.AddStudent;
 import com.mycompany.gestionetudiant.vue.crud.DeleteStudent;
 
+import java.awt.*;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.prefs.Preferences;
 
 /**
@@ -16,13 +20,16 @@ import java.util.prefs.Preferences;
  */
 public class Home extends javax.swing.JFrame {
     private final Preferences preferences = Preferences.systemNodeForPackage(Login.class);
+    private final StudentService service = new StudentService();
+    private final List<Student> students = this.service.getStudents();
 
     /**
      * Creates new form Home
      */
-    public Home() {
+    public Home() throws SQLException {
         initComponents();
         this.lb_connected_user.setText(this.preferences.get("name", ""));
+        displayStudents();
     }
 
     /**
@@ -105,12 +112,9 @@ public class Home extends javax.swing.JFrame {
 
         tab_students.setBackground(new java.awt.Color(153, 153, 153));
         tab_students.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {1, "Mamadou Aliou", "2100888", "NTIC", "Génie Informatique", "Licence 3", "Koloma", "627542969"}
-            },
-            new String [] {
-                "ID", "NOM", "MATRICULE", "DEPARTEMENT", "FILIERE", "NIVEAU", "ADRESSE", "TEL"
-            }
+                new String [] {
+                    "ID", "NOM", "MATRICULE", "DEPARTEMENT", "FILIERE", "NIVEAU", "ADRESSE", "TEL"
+                }, students.size()
         ) {
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
@@ -127,6 +131,11 @@ public class Home extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+
+        tab_students.setRowHeight(25);
+        tab_students.setAutoCreateRowSorter(true);
+        tab_students.setSelectionBackground(new Color(47, 65, 167));
+        tab_students.getTableHeader().setBackground(new Color(35, 119, 231));
         jScrollPane1.setViewportView(tab_students);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -212,6 +221,23 @@ public class Home extends javax.swing.JFrame {
             throw new RuntimeException(e);
         }
     }//GEN-LAST:event_btn_addActionPerformed
+
+    private void displayStudents() {
+        if (students == null) {
+            return;
+        }
+
+        for (int i = 0; i < students.size(); i++) {
+            tab_students.getModel().setValueAt(students.get(i).getId(), i, 0);
+            tab_students.getModel().setValueAt(students.get(i).getName(), i, 1);
+            tab_students.getModel().setValueAt(students.get(i).getRegistrationNumber(), i, 2);
+            tab_students.getModel().setValueAt(students.get(i).getDepartment(), i, 3);
+            tab_students.getModel().setValueAt(students.get(i).getSector(), i, 4);
+            tab_students.getModel().setValueAt(students.get(i).getLevel(), i, 5);
+            tab_students.getModel().setValueAt(students.get(i).getAddress(), i, 6);
+            tab_students.getModel().setValueAt(students.get(i).getPhoneNumber(), i, 7);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_add;

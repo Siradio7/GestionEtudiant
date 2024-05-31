@@ -137,7 +137,14 @@ public class Login extends javax.swing.JPanel {
         SwingUtilities.getWindowAncestor(this).dispose();
         Preferences preferences = Preferences.systemNodeForPackage(Login.class);
         preferences.put("name", connectedAdministrator.getName());
-        Home home = new Home();
+        Home home = null ;
+
+        try {
+            home = new Home();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         home.setLocationRelativeTo(null);
         home.setVisible(true);
     }//GEN-LAST:event_btn_loginActionPerformed
