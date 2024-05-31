@@ -133,7 +133,7 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        tab_students.setRowHeight(25);
+        tab_students.setRowHeight(35);
         tab_students.setAutoCreateRowSorter(true);
         tab_students.setSelectionBackground(new Color(47, 65, 167));
         tab_students.getTableHeader().setBackground(new Color(35, 119, 231));
