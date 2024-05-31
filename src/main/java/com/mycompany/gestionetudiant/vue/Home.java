@@ -5,6 +5,7 @@
 package com.mycompany.gestionetudiant.vue;
 
 import com.mycompany.gestionetudiant.vue.crud.AddStudent;
+import com.mycompany.gestionetudiant.vue.crud.DeleteStudent;
 
 import java.sql.SQLException;
 import java.util.prefs.Preferences;
@@ -96,14 +97,16 @@ public class Home extends javax.swing.JFrame {
 
         btn_delete.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
         btn_delete.setText("Supprimer");
+        btn_delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_deleteActionPerformed(evt);
+            }
+        });
 
         tab_students.setBackground(new java.awt.Color(153, 153, 153));
         tab_students.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {1, "Mamadou Aliou", "2100888", "NTIC", "Génie Informatique", "Licence 3", "Koloma", "627542969"}
             },
             new String [] {
                 "ID", "NOM", "MATRICULE", "DEPARTEMENT", "FILIERE", "NIVEAU", "ADRESSE", "TEL"
@@ -190,6 +193,20 @@ public class Home extends javax.swing.JFrame {
             AddStudent fen = new AddStudent();
 
             fen.setLocationRelativeTo(null);
+            fen.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            fen.setVisible(true);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }//GEN-LAST:event_btn_addActionPerformed
+
+    private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
+        // TODO add your handling code here:
+        try {
+            DeleteStudent fen = new DeleteStudent();
+
+            fen.setLocationRelativeTo(null);
+            fen.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             fen.setVisible(true);
         } catch (SQLException e) {
             throw new RuntimeException(e);
