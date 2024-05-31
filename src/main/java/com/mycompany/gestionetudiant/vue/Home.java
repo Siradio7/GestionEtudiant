@@ -21,7 +21,7 @@ import java.util.prefs.Preferences;
 public class Home extends javax.swing.JFrame {
     private final Preferences preferences = Preferences.systemNodeForPackage(Login.class);
     private final StudentService service = new StudentService();
-    private final List<Student> students = this.service.getStudents();
+    private List<Student> students = this.service.getStudents();
 
     /**
      * Creates new form Home
@@ -50,6 +50,7 @@ public class Home extends javax.swing.JFrame {
         btn_delete = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tab_students = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -112,9 +113,9 @@ public class Home extends javax.swing.JFrame {
 
         tab_students.setBackground(new java.awt.Color(153, 153, 153));
         tab_students.setModel(new javax.swing.table.DefaultTableModel(
-                new String [] {
-                    "ID", "NOM", "MATRICULE", "DEPARTEMENT", "FILIERE", "NIVEAU", "ADRESSE", "TEL"
-                }, students.size()
+            new String [] {
+                "ID", "NOM", "MATRICULE", "DEPARTEMENT", "FILIERE", "NIVEAU", "ADRESSE", "TEL"
+            }, students.size()
         ) {
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
@@ -138,6 +139,13 @@ public class Home extends javax.swing.JFrame {
         tab_students.getTableHeader().setBackground(new Color(35, 119, 231));
         jScrollPane1.setViewportView(tab_students);
 
+        jButton1.setText("Rafraichir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -151,11 +159,17 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(119, Short.MAX_VALUE))
             .addComponent(jScrollPane1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addGap(8, 8, 8)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -196,7 +210,7 @@ public class Home extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_logoutActionPerformed
 
-    private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
+    private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {                                        
         // TODO add your handling code here:
         try {
             AddStudent fen = new AddStudent();
@@ -207,7 +221,7 @@ public class Home extends javax.swing.JFrame {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }//GEN-LAST:event_btn_addActionPerformed
+    }
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
         // TODO add your handling code here:
@@ -221,6 +235,34 @@ public class Home extends javax.swing.JFrame {
             throw new RuntimeException(e);
         }
     }//GEN-LAST:event_btn_addActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        students = this.service.getStudents();
+
+        tab_students.setModel(new javax.swing.table.DefaultTableModel(
+                new String [] {
+                        "ID", "NOM", "MATRICULE", "DEPARTEMENT", "FILIERE", "NIVEAU", "ADRESSE", "TEL"
+                }, students.size()
+        ) {
+            Class[] types = new Class [] {
+                    java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                    false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+
+        displayStudents();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void displayStudents() {
         if (students == null) {
@@ -244,6 +286,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton btn_delete;
     private javax.swing.JButton btn_logout;
     private javax.swing.JButton btn_update;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
