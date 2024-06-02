@@ -82,6 +82,7 @@ public class StudentService implements IStudent {
 
                 student.setId(result.getInt("id"));
                 student.setName(result.getString("name"));
+                student.setRegistrationNumber(result.getString("registration_number"));
                 student.setDepartment(result.getString("department"));
                 student.setSector(result.getString("sector"));
                 student.setLevel(result.getString("level"));
