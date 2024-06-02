@@ -52,6 +52,7 @@ public class Signup extends javax.swing.JPanel {
         btn_signup.setBackground(new java.awt.Color(25, 118, 210));
         btn_signup.setForeground(new java.awt.Color(255, 255, 255));
         btn_signup.setText("S'inscrire");
+        btn_signup.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user-plus.png")));
         btn_signup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_signupActionPerformed(evt);
@@ -72,6 +73,7 @@ public class Signup extends javax.swing.JPanel {
         jLabel3.setText("Inscription");
 
         btn_login.setText("Vous avez un compte ?");
+        btn_login.setIcon(new javax.swing.ImageIcon(getClass().getResource("/log-in.png")));
         btn_login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_loginActionPerformed(evt);
