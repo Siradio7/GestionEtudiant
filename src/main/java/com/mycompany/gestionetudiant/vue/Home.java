@@ -9,9 +9,11 @@ import com.mycompany.gestionetudiant.service.StudentService;
 import com.mycompany.gestionetudiant.vue.crud.AddStudent;
 import com.mycompany.gestionetudiant.vue.crud.DeleteStudent;
 
+import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
 import java.util.prefs.Preferences;
 
 /**
@@ -59,6 +61,7 @@ public class Home extends javax.swing.JFrame {
         btn_logout.setBackground(new java.awt.Color(220, 38, 38));
         btn_logout.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btn_logout.setForeground(new java.awt.Color(255, 255, 255));
+        btn_logout.setIcon(new javax.swing.ImageIcon(getClass().getClassLoader().getResource("log-out.png"))); // NOI18N
         btn_logout.setText("Se deconnecter");
         btn_logout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -68,6 +71,7 @@ public class Home extends javax.swing.JFrame {
 
         lb_connected_user.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         lb_connected_user.setForeground(new java.awt.Color(255, 255, 255));
+        lb_connected_user.setIcon(new ImageIcon(getClass().getClassLoader().getResource("circle-user.png")));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -93,6 +97,7 @@ public class Home extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(17, 24, 39));
 
         btn_add.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        btn_add.setIcon(new javax.swing.ImageIcon(getClass().getResource("/square-plus.png"))); // NOI18N
         btn_add.setText("Ajouter");
         btn_add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,9 +106,11 @@ public class Home extends javax.swing.JFrame {
         });
 
         btn_update.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        btn_update.setIcon(new javax.swing.ImageIcon(getClass().getResource("/square-pen.png"))); // NOI18N
         btn_update.setText("Modifier");
 
         btn_delete.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        btn_delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trash-2.png"))); // NOI18N
         btn_delete.setText("Supprimer");
         btn_delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,9 +120,15 @@ public class Home extends javax.swing.JFrame {
 
         tab_students.setBackground(new java.awt.Color(153, 153, 153));
         tab_students.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
             new String [] {
                 "ID", "NOM", "MATRICULE", "DEPARTEMENT", "FILIERE", "NIVEAU", "ADRESSE", "TEL"
-            }, students.size()
+            }
         ) {
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
@@ -132,7 +145,6 @@ public class Home extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-
         tab_students.setRowHeight(35);
         tab_students.setAutoCreateRowSorter(true);
         tab_students.setSelectionBackground(new Color(47, 65, 167));
@@ -140,6 +152,7 @@ public class Home extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tab_students);
 
         jButton1.setText("Rafraichir");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/refresh-ccw-dot.png")));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -168,14 +181,14 @@ public class Home extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(8, 8, 8)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE))
+                .addComponent(jScrollPane1))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -243,7 +256,7 @@ public class Home extends javax.swing.JFrame {
         tab_students.setModel(new javax.swing.table.DefaultTableModel(
                 new String [] {
                         "ID", "NOM", "MATRICULE", "DEPARTEMENT", "FILIERE", "NIVEAU", "ADRESSE", "TEL"
-                }, students.size()
+                }, students.size() < 15 ? 15 : students.size()
         ) {
             Class[] types = new Class [] {
                     java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
