@@ -50,6 +50,7 @@ public class Login extends javax.swing.JPanel {
         btn_login.setBackground(new java.awt.Color(25, 118, 210));
         btn_login.setForeground(new java.awt.Color(255, 255, 255));
         btn_login.setText("Se connecter");
+        btn_login.setIcon(new javax.swing.ImageIcon(getClass().getResource("/log-in.png")));
         btn_login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_loginActionPerformed(evt);
@@ -70,6 +71,7 @@ public class Login extends javax.swing.JPanel {
         jLabel3.setText("Connexion");
 
         btn_signup.setText("Pas de compte ?");
+        btn_signup.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user-plus.png")));
         btn_signup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_signupActionPerformed(evt);
