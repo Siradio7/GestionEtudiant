@@ -42,14 +42,14 @@ public class AddStudent extends javax.swing.JFrame {
         tf_registration_number = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        tf_sector = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        tf_level = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         tf_address = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         tf_phone_number = new javax.swing.JTextField();
         cb_department = new javax.swing.JComboBox<>();
+        cb_sector = new javax.swing.JComboBox<>();
+        cb_level = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,13 +89,9 @@ public class AddStudent extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Filiere");
 
-        tf_sector.setBackground(new java.awt.Color(226, 232, 221));
-
         jLabel8.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Niveau");
-
-        tf_level.setBackground(new java.awt.Color(226, 232, 221));
 
         jLabel9.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -110,7 +106,16 @@ public class AddStudent extends javax.swing.JFrame {
         tf_phone_number.setBackground(new java.awt.Color(226, 232, 221));
 
         cb_department.setBackground(new java.awt.Color(226, 232, 221));
-        cb_department.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "GIT", "ECONOMIE", "DROIT", "MEDECINE" }));
+        cb_department.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NTIC", "SCIENCES MEDICALES", " " }));
+        cb_department.setSelectedIndex(-1);
+
+        cb_sector.setBackground(new java.awt.Color(226, 232, 221));
+        cb_sector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "GIT", "ECONOMIE", "DROIT", "MIAGE", "MEDECINE", "BIOCHIMIE" }));
+        cb_sector.setSelectedIndex(-1);
+
+        cb_level.setBackground(new java.awt.Color(226, 232, 221));
+        cb_level.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Licence 1", "Licence 2", "Licence 3", "Licence 4" }));
+        cb_level.setSelectedIndex(-1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -142,11 +147,11 @@ public class AddStudent extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(tf_sector, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(cb_sector, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(tf_level, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(cb_level, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
@@ -177,12 +182,12 @@ public class AddStudent extends javax.swing.JFrame {
                     .addComponent(cb_department))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tf_sector, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                    .addComponent(cb_sector))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tf_level, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                    .addComponent(cb_level))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -215,8 +220,8 @@ public class AddStudent extends javax.swing.JFrame {
         String name = tf_name.getText();
         String registration_number = tf_registration_number.getText();
         String department = cb_department.getSelectedItem().toString();
-        String sector = tf_sector.getText();
-        String level = tf_level.getText();
+        String sector = cb_sector.getSelectedItem().toString();
+        String level = cb_level.getSelectedItem().toString();
         String address = tf_address.getText();
         String phone_number = tf_phone_number.getText();
 
@@ -229,6 +234,7 @@ public class AddStudent extends javax.swing.JFrame {
 
         if (this.service.addStudent(student)) {
             JOptionPane.showMessageDialog(this, "Ajout effectué avec succès");
+            this.dispose();
             return;
         }
 
@@ -238,6 +244,8 @@ public class AddStudent extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_add;
     private javax.swing.JComboBox<String> cb_department;
+    private javax.swing.JComboBox<String> cb_level;
+    private javax.swing.JComboBox<String> cb_sector;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -248,10 +256,8 @@ public class AddStudent extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField tf_address;
-    private javax.swing.JTextField tf_level;
     private javax.swing.JTextField tf_name;
     private javax.swing.JTextField tf_phone_number;
     private javax.swing.JTextField tf_registration_number;
-    private javax.swing.JTextField tf_sector;
     // End of variables declaration//GEN-END:variables
 }
