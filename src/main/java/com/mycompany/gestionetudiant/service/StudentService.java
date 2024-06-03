@@ -100,7 +100,7 @@ public class StudentService implements IStudent {
 
     @Override
     public boolean updateStudent(Student student) {
-        this.request = "UPDATE students SET name=?, department=?, sector=?, level=?, address=?, phone_number=? WHERE registration_number=?)";
+        this.request = "UPDATE students SET name=?, department=?, sector=?, level=?, address=?, phone_number=? WHERE registration_number=?";
 
         try {
             PreparedStatement statement = this.connection.prepareStatement(this.request);
