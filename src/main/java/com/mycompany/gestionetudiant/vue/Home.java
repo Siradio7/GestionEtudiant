@@ -8,6 +8,7 @@ import com.mycompany.gestionetudiant.model.Student;
 import com.mycompany.gestionetudiant.service.StudentService;
 import com.mycompany.gestionetudiant.vue.crud.AddStudent;
 import com.mycompany.gestionetudiant.vue.crud.DeleteStudent;
+import com.mycompany.gestionetudiant.vue.crud.UpdateStudent;
 
 import javax.swing.*;
 import java.awt.*;
@@ -52,7 +53,7 @@ public class Home extends javax.swing.JFrame {
         btn_delete = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tab_students = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        btn_refresh = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,8 +62,15 @@ public class Home extends javax.swing.JFrame {
         btn_logout.setBackground(new java.awt.Color(220, 38, 38));
         btn_logout.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btn_logout.setForeground(new java.awt.Color(255, 255, 255));
-        btn_logout.setIcon(new javax.swing.ImageIcon(getClass().getClassLoader().getResource("log-out.png"))); // NOI18N
         btn_logout.setText("Se deconnecter");
+        btn_logout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_logoutMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_logoutMouseExited(evt);
+            }
+        });
         btn_logout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_logoutActionPerformed(evt);
@@ -71,7 +79,6 @@ public class Home extends javax.swing.JFrame {
 
         lb_connected_user.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         lb_connected_user.setForeground(new java.awt.Color(255, 255, 255));
-        lb_connected_user.setIcon(new ImageIcon(getClass().getClassLoader().getResource("circle-user.png")));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -97,8 +104,15 @@ public class Home extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(17, 24, 39));
 
         btn_add.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
-        btn_add.setIcon(new javax.swing.ImageIcon(getClass().getResource("/square-plus.png"))); // NOI18N
         btn_add.setText("Ajouter");
+        btn_add.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_addMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_addMouseExited(evt);
+            }
+        });
         btn_add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_addActionPerformed(evt);
@@ -106,12 +120,31 @@ public class Home extends javax.swing.JFrame {
         });
 
         btn_update.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
-        btn_update.setIcon(new javax.swing.ImageIcon(getClass().getResource("/square-pen.png"))); // NOI18N
         btn_update.setText("Modifier");
+        btn_update.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_updateMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_updateMouseExited(evt);
+            }
+        });
+        btn_update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_updateActionPerformed(evt);
+            }
+        });
 
         btn_delete.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
-        btn_delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trash-2.png"))); // NOI18N
         btn_delete.setText("Supprimer");
+        btn_delete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_deleteMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_deleteMouseExited(evt);
+            }
+        });
         btn_delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_deleteActionPerformed(evt);
@@ -145,17 +178,20 @@ public class Home extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tab_students.setRowHeight(35);
-        tab_students.setAutoCreateRowSorter(true);
-        tab_students.setSelectionBackground(new Color(47, 65, 167));
-        tab_students.getTableHeader().setBackground(new Color(35, 119, 231));
         jScrollPane1.setViewportView(tab_students);
 
-        jButton1.setText("Rafraichir");
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/refresh-ccw-dot.png")));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_refresh.setText("Rafraichir");
+        btn_refresh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_refreshMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_refreshMouseExited(evt);
+            }
+        });
+        btn_refresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_refreshActionPerformed(evt);
             }
         });
 
@@ -174,14 +210,14 @@ public class Home extends javax.swing.JFrame {
             .addComponent(jScrollPane1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(8, 8, 8)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -249,7 +285,7 @@ public class Home extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_addActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btn_refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_refreshActionPerformed
         // TODO add your handling code here:
         students = this.service.getStudents();
 
@@ -275,7 +311,60 @@ public class Home extends javax.swing.JFrame {
         });
 
         displayStudents();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btn_refreshActionPerformed
+
+    private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
+        // TODO add your handling code here:
+        try {
+            UpdateStudent fen = new UpdateStudent();
+
+            fen.setLocationRelativeTo(null);
+            fen.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            fen.setVisible(true);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }//GEN-LAST:event_btn_updateActionPerformed
+
+    private void btn_addMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_addMouseEntered
+
+    private void btn_addMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_addMouseExited
+
+    private void btn_updateMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_updateMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_updateMouseEntered
+
+    private void btn_updateMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_updateMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_updateMouseExited
+
+    private void btn_deleteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_deleteMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_deleteMouseEntered
+
+    private void btn_deleteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_deleteMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_deleteMouseExited
+
+    private void btn_refreshMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_refreshMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_refreshMouseEntered
+
+    private void btn_refreshMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_refreshMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_refreshMouseExited
+
+    private void btn_logoutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_logoutMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_logoutMouseEntered
+
+    private void btn_logoutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_logoutMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_logoutMouseExited
 
     private void displayStudents() {
         if (students == null) {
@@ -298,8 +387,8 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton btn_add;
     private javax.swing.JButton btn_delete;
     private javax.swing.JButton btn_logout;
+    private javax.swing.JButton btn_refresh;
     private javax.swing.JButton btn_update;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
